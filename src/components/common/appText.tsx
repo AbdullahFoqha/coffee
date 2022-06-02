@@ -6,7 +6,10 @@ interface Props {
     style?: TextStyle
 }
 
-const AppText: React.FC<Props> = ({children, style}) => {
+const AppText: React.FC<Props> = ({
+    children,
+    style
+}) => {
     return (
         <Text style={[styles.text, style]}>
             {children}
@@ -17,7 +20,7 @@ const AppText: React.FC<Props> = ({children, style}) => {
 const styles = StyleSheet.create({
     text: {
         fontSize: 16,
-        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Lao Sangam MN',
+        // fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Lao Sangam MN',
         color: colors.textPrimary
     }
 })

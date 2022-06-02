@@ -3,10 +3,13 @@ import {SafeAreaView, StyleSheet, ViewStyle} from "react-native";
 import colors from "../../config/colors";
 
 interface Props {
-    style: ViewStyle
+    style?: ViewStyle | Array<ViewStyle>
 }
 
-const AppView: React.FC<Props> = ({children, style}) => {
+const AppView: React.FC<Props> = ({
+    children,
+    style
+}) => {
     return (
         <SafeAreaView style={[styles.container, style]}>
             {children}
@@ -16,7 +19,6 @@ const AppView: React.FC<Props> = ({children, style}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: colors.bg
     }
 })
