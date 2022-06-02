@@ -3,10 +3,7 @@ import Home from "../screens/home";
 import navigations from "../config/navigations";
 import colors from "../config/colors";
 import React, {Fragment} from "react";
-import {Entypo, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
-import {View} from "react-native";
-import Navigations from "../config/navigations";
-import {IconProps} from "@expo/vector-icons/build/createIconSet";
+import {Entypo, MaterialCommunityIcons} from "@expo/vector-icons";
 import Favorite from "../screens/favorite";
 import Cart from "../screens/cart";
 import Profile from "../screens/profile";
@@ -28,9 +25,9 @@ const getMainNavigator = () => {
     )
 }
 
-const renderTab = (tabName: string, iconName: string, Component: React.FC) =>
+const renderTab = (tabName: string, iconName: 'home-variant' | 'account-outline' | 'cart-outline' | 'cards-heart-outline', Component: React.FC) =>
     <Tab.Screen name={tabName} options={() => ({
-        tabBarLabel: ({focused, position, color}) => {
+        tabBarLabel: ({focused, color}) => {
             return (
                 <Fragment>
                     {focused && <Entypo name={'dot-single'} size={20} color={color}/>}
