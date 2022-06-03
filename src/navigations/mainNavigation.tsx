@@ -15,7 +15,11 @@ const getMainNavigator = () => {
         <Tab.Navigator screenOptions={{
             tabBarActiveTintColor: colors.primary,
             tabBarInactiveTintColor: colors.iconPrimary,
-            tabBarStyle: {backgroundColor: colors.white, borderTopWidth: 0}
+            tabBarStyle: {
+                backgroundColor: colors.white,
+                borderTopWidth: 0
+            },
+            headerShown: false
         }}>
             {renderTab(navigations.HOME, 'home-variant', Home)}
             {renderTab(navigations.FAVORITE, 'cards-heart-outline', Favorite)}
@@ -27,14 +31,20 @@ const getMainNavigator = () => {
 
 const renderTab = (tabName: string, iconName: 'home-variant' | 'account-outline' | 'cart-outline' | 'cards-heart-outline', Component: React.FC) =>
     <Tab.Screen name={tabName} options={() => ({
-        tabBarLabel: ({focused, color}) => {
+        tabBarLabel: ({
+            focused,
+            color
+        }) => {
             return (
                 <Fragment>
                     {focused && <Entypo name={'dot-single'} size={20} color={color}/>}
                 </Fragment>
             )
         },
-        tabBarIcon: ({color, size}) => {
+        tabBarIcon: ({
+            color,
+            size
+        }) => {
             return (
                 <MaterialCommunityIcons name={iconName} color={color} size={size}/>
             )

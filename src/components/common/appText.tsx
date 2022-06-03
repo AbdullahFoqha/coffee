@@ -1,17 +1,19 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, TextStyle, View} from "react-native";
+import {StyleSheet, Text, TextProps, TextStyle} from "react-native";
 import colors from "../../config/colors";
 
 interface Props {
-    style?: TextStyle
+    style?: TextStyle,
+    textProps?: TextProps
 }
 
 const AppText: React.FC<Props> = ({
     children,
-    style
+    style,
+    textProps
 }) => {
     return (
-        <Text style={[styles.text, style]}>
+        <Text {...textProps} style={[styles.text, style]}>
             {children}
         </Text>
     );

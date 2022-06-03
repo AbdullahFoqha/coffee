@@ -2,30 +2,33 @@ import CoffeeCategory from "../models/category";
 import Coffee from "../models/coffee";
 
 const categories: Array<CoffeeCategory> = new Array<CoffeeCategory>({
+        id: 1,
         categoryName: 'Cappacino',
         iconName: 'coffee'
     }, {
+        id: 2,
         categoryName: 'Coca cola',
         iconName: 'food-fork-drink'
     }, {
-        categoryName: 'Express',
+        id: 3,
+        categoryName: 'Espresso',
         iconName: 'coffee-maker'
     }
 )
 
 const coffeeData: Array<Coffee> = new Array<Coffee>({
     imageURL: 'https://coffee.alexflipnote.dev/random',
-    title: 'Cappacino',
+    title: 'Cappacino asdf sdf asdf',
     favorite: true,
     price: 5.12,
     subTitle: 'without sugar',
     rating: 4.5
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
-    title: 'Cappacino',
+    title: 'Espresso',
     favorite: true,
     price: 5.12,
-    subTitle: 'without sugar',
+    subTitle: 'with cream',
     rating: 4.5
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/random',
@@ -33,7 +36,7 @@ const coffeeData: Array<Coffee> = new Array<Coffee>({
     favorite: true,
     price: 5.12,
     subTitle: 'without sugar',
-    rating: 4.5
+    rating: 4.5,
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
     title: 'Cappacino',

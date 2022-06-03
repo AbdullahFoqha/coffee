@@ -9,9 +9,9 @@ interface Props {
 
 const Profile: React.FC<Props> = ({}) => {
     return (
-        <AppView style={styles.container}>
-            <AppText>Profile</AppText>
-        </AppView>
+        <View style={styles.container}>
+
+        </View>
     );
 }
 
