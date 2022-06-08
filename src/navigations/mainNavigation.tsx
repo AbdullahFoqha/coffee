@@ -19,7 +19,7 @@ const getMainNavigator = () => {
                 backgroundColor: colors.white,
                 borderTopWidth: 0
             },
-            headerShown: false
+            // headerShown: false
         }}>
             {renderTab(navigations.HOME, 'home-variant', Home)}
             {renderTab(navigations.FAVORITE, 'cards-heart-outline', Favorite)}

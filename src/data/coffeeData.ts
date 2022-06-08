@@ -22,14 +22,16 @@ const coffeeData: Array<Coffee> = new Array<Coffee>({
     favorite: true,
     price: 5.12,
     subTitle: 'without sugar',
-    rating: 4.5
+    rating: 4.5,
+    description: 'Get three ice flavoured cappuccinos for the'
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
     title: 'Espresso',
     favorite: true,
     price: 5.12,
     subTitle: 'with cream',
-    rating: 4.5
+    rating: 4.5,
+    description: 'Get three ice flavoured cappuccinos for the'
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/random',
     title: 'Cappacino',
@@ -37,13 +39,15 @@ const coffeeData: Array<Coffee> = new Array<Coffee>({
     price: 5.12,
     subTitle: 'without sugar',
     rating: 4.5,
+    description: 'Get three ice flavoured cappuccinos for the'
 }, {
     imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
     title: 'Cappacino',
     favorite: true,
     price: 5.12,
     subTitle: 'without sugar',
-    rating: 4.5
+    rating: 4.5,
+    description: 'Get three ice flavoured cappuccinos for the'
 })
 
 export const getCategories = (): Array<CoffeeCategory> => {

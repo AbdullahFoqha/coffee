@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, ListRenderItemInfo, ScrollView, StyleSheet} from "react-native";
-import AppView from "../components/common/appView";
 import Coffee from "../models/coffee";
 import {getCategories, getCoffeeList} from "../data/coffeeData";
 import ProductCard from "../components/productCard";
@@ -9,8 +8,8 @@ import CoffeeCategory from "../models/category";
 import AppIcon from "../components/common/appIcon";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import colors from "../config/colors";
-import * as Constants from "expo-constants";
 import HomeSearch from "../components/homeSearch";
+import OffersCard from "../components/offersCard";
 
 interface Props {
 
@@ -37,6 +36,7 @@ const Home: React.FC<Props> = ({}) => {
     }
 
     const renderCoffeeItem = ({item: coffee}: ListRenderItemInfo<Coffee>) => <ProductCard coffee={coffee}/>
+    const renderOfferItem = ({item: offer}: ListRenderItemInfo<Coffee>) => <OffersCard offer={offer}/>
 
     const renderCoffeeCategoryItem = ({
         item: {
@@ -56,8 +56,8 @@ const Home: React.FC<Props> = ({}) => {
         />
 
     return (
-        <ScrollView style={styles.container}>
-            <AppText style={styles.title}>Good morning, David</AppText>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+            <AppText style={styles.greeting}>Good morning, David</AppText>
             <HomeSearch/>
             <AppText style={styles.title}>Categories</AppText>
             <FlatList
@@ -67,22 +67,7 @@ const Home: React.FC<Props> = ({}) => {
                 renderItem={renderCoffeeCategoryItem}
                 horizontal
             />
-            <FlatList
-                contentContainerStyle={styles.listContainer}
-                style={styles.productList}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                data={coffeeData}
-                renderItem={renderCoffeeItem}
-            />
-
-            <AppText style={styles.title}>Special Offers</AppText>
-            <FlatList
-                contentContainerStyle={styles.listContainer}
-                style={styles.productList}
-                data={coffeeData}
-                renderItem={renderCoffeeItem}
-            />
+            n
         </ScrollView>
     );
 }
@@ -90,7 +75,7 @@ const Home: React.FC<Props> = ({}) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.bg,
-        marginTop: Constants.default.statusBarHeight,
+        // marginTop: Constants.default.statusBarHeight,
         flex: 1,
     },
     productList: {
@@ -106,7 +91,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 20,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
     },
     categoryStyle: {
         marginHorizontal: 2.5,
@@ -118,6 +104,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 2.5,
         marginVertical: 10,
         padding: 15
+    },
+    greeting: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginTop: 10,
     }
 })
 
