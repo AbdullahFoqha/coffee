@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo, ScrollView, StyleSheet} from "react-native";
+import {FlatList, ListRenderItemInfo, SafeAreaView, ScrollView, StyleSheet, View} from "react-native";
 import Coffee from "../models/coffee";
 import {getCategories, getCoffeeList} from "../data/coffeeData";
 import ProductCard from "../components/productCard";
@@ -10,6 +10,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import colors from "../config/colors";
 import HomeSearch from "../components/homeSearch";
 import OffersCard from "../components/offersCard";
+import AppView from "../components/common/appView";
 
 interface Props {
 
@@ -56,36 +57,56 @@ const Home: React.FC<Props> = ({}) => {
         />
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-            <AppText style={styles.greeting}>Good morning, David</AppText>
-            <HomeSearch/>
-            <AppText style={styles.title}>Categories</AppText>
+        <SafeAreaView style={styles.container}>
+
             <FlatList
-                contentContainerStyle={[styles.listContainer, {marginBottom: 0}]}
-                style={[styles.productList, {marginHorizontal: 5}]}
-                data={coffeeCategoriesData}
-                renderItem={renderCoffeeCategoryItem}
-                horizontal
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={
+                    <>
+                        <AppText style={styles.greeting}>Good morning, David</AppText>
+                        <HomeSearch/>
+                        <AppText style={styles.title}>Categories</AppText>
+                        <FlatList
+                            contentContainerStyle={[styles.listContainer, {marginBottom: 0}]}
+                            style={[styles.productList, {marginHorizontal: 5}]}
+                            data={coffeeCategoriesData}
+                            renderItem={renderCoffeeCategoryItem}
+                            horizontal
+                        />
+                        <FlatList
+                            contentContainerStyle={styles.listContainer}
+                            style={styles.productList}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            data={coffeeData}
+                            renderItem={renderCoffeeItem}
+                        />
+
+                        <AppText style={styles.title}>Special Offers  &#x1f525;</AppText>
+                    </>
+                }
+
+                style={styles.productList}
+                data={coffeeData}
+                renderItem={renderOfferItem}
             />
-            n
-        </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.bg,
-        // marginTop: Constants.default.statusBarHeight,
         flex: 1,
     },
     productList: {
         flexGrow: 0,
-        paddingBottom: 5
+        paddingBottom: 5,
     },
     listContainer: {
         paddingLeft: 10,
         paddingRight: 10,
-        marginBottom: 20
+        marginBottom: 20,
     },
     title: {
         fontSize: 20,
@@ -109,7 +130,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 20,
-        marginTop: 10,
+        marginTop: 15,
     }
 })
 

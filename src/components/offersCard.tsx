@@ -13,12 +13,14 @@ const OffersCard: React.FC<Props> = ({offer}) => {
     return (
         <View style={styles.container}>
             <Image source={{uri: offer.imageURL}} style={styles.image}/>
-            <AppView>
+            <AppView style={{flex: 1}}>
                 <AppView style={styles.tagContainer}>
-                    <AppText style={styles.tag}>Discount Sales</AppText>
+                    <AppText textProps={{
+                        ellipsizeMode: 'tail',
+                        numberOfLines: 1
+                    }} style={styles.tag}>Discount Sales</AppText>
                 </AppView>
-
-                {/*<AppText>{offer.description}</AppText>*/}
+                <AppText style={styles.description}>{offer.description}</AppText>
             </AppView>
         </View>
     );
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.white,
         padding: 10,
-        width: '100%',
+        width: '90%',
         shadowColor: colors.textPrimary,
         shadowRadius: 3,
         shadowOpacity: .2,
@@ -37,25 +39,36 @@ const styles = StyleSheet.create({
             width: 2,
             height: 2
         },
-        marginVertical: 5,
-        borderRadius: 20
+        marginVertical: 7,
+        borderRadius: 20,
+        marginHorizontal: 15,
+        alignSelf: 'center'
     },
     image: {
-        width: '35%',
-        height: 125,
+        width: '37%',
+        height: 115,
         borderRadius: 20,
         alignSelf: 'center',
         marginRight: 10
     },
     tagContainer: {
         backgroundColor: colors.accent,
-        paddingHorizontal: 10,
+
         paddingVertical: 3,
         borderRadius: 15,
-        marginTop: 15
+        marginTop: 15,
+        marginBottom: 10,
+        width: '50%',
+        justifyContent: "center",
+        alignItems: "center"
     },
     tag: {
         color: colors.white,
+        fontSize: 12,
+        fontWeight: '500',
+    },
+    description: {
+        fontWeight: 'bold'
     }
 })
 

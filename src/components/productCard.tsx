@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         backgroundColor: colors.white,
         borderRadius: 20,
-        margin: 5,
+        margin: 7,
         marginBottom: 10,
         paddingVertical: 10,
         paddingHorizontal: 10,
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 10,
         marginBottom: 5,
-
     },
     bottomContainer: {
         margin: 10,
