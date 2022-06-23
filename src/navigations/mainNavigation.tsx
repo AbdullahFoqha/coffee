@@ -1,14 +1,24 @@
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/home";
 import navigations from "../config/navigations";
 import colors from "../config/colors";
-import React, {Fragment} from "react";
-import {Entypo, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
+import React, { Fragment } from "react";
+import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Favorite from "../screens/favorite";
 import Cart from "../screens/cart";
 import Profile from "../screens/profile";
-import {Image, View} from "react-native";
+import { Image, View } from "react-native";
+import ProductDetails from "../screens/productDetails";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+
+const Stack = createNativeStackNavigator()
+const StackNavigator = () => (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name={navigations.HOME} component={Home}/>
+        <Stack.Screen name={navigations.DETAILS} component={ProductDetails}/>
+    </Stack.Navigator>
+)
 
 const Tab = createBottomTabNavigator()
 const getMainNavigator = () => {
@@ -20,8 +30,9 @@ const getMainNavigator = () => {
                 backgroundColor: colors.white,
                 borderTopWidth: 0
             },
+            headerShown: false
         }}>
-            {renderTab(navigations.HOME, 'home-variant', Home)}
+            {renderTab(navigations.HOME_STACK, 'home-variant', StackNavigator)}
             {renderTab(navigations.FAVORITE, 'cards-heart-outline', Favorite)}
             {renderTab(navigations.CART, 'cart-outline', Cart)}
             {renderTab(navigations.PROFILE, 'account-outline', Profile)}
@@ -31,36 +42,23 @@ const getMainNavigator = () => {
 
 const renderTab = (tabName: string, iconName: 'home-variant' | 'account-outline' | 'cart-outline' | 'cards-heart-outline', Component: React.FC) =>
     <Tab.Screen name={tabName} options={() => ({
-        headerLeft: ({}) => (
-            <View style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-            }}>
-                <Image source={{
-                    uri: 'https://coffee.alexflipnote.dev/random',
-                    height: 40,
-                    width: 40
-                }} style={{borderRadius: 100}}/>
-                <View/>
-            </View>
-        ),
-        headerRight: () => (
-            <View style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-            }}>
-                <View/>
-                <Ionicons name={'notifications-outline'} size={25}/>
-            </View>
-        ),
-        headerStyle: {
-            backgroundColor: colors.white,
-            borderBottomWidth: 0,
-            elevation: 0,
-            shadowColor: 'transparent'
-        },
+        // headerLeft: ,
+        // headerRight: () => (
+        //     <View style={{
+        //         width: '100%',
+        //         flexDirection: 'row',
+        //         justifyContent: 'space-around'
+        //     }}>
+        //         <View/>
+        //         <Ionicons name={'notifications-outline'} size={25}/>
+        //     </View>
+        // ),
+        // headerStyle: {
+        //     backgroundColor: colors.white,
+        //     borderBottomWidth: 0,
+        //     elevation: 0,
+        //     shadowColor: 'transparent'
+        // },
         tabBarLabel: ({
             focused,
             color

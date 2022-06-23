@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo, SafeAreaView, ScrollView, StyleSheet, View} from "react-native";
+import React, { useEffect, useState } from 'react';
+import { FlatList, Image, ListRenderItemInfo, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 import Coffee from "../models/coffee";
-import {getCategories, getCoffeeList} from "../data/coffeeData";
+import { getCategories, getCoffeeList } from "../data/coffeeData";
 import ProductCard from "../components/productCard";
 import AppText from "../components/common/appText";
 import CoffeeCategory from "../models/category";
 import AppIcon from "../components/common/appIcon";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import HomeSearch from "../components/homeSearch";
 import OffersCard from "../components/offersCard";
-import AppView from "../components/common/appView";
+import { useNavigation } from "@react-navigation/native";
+import navigations from "../config/navigations";
 
 interface Props {
-
 }
 
 const Home: React.FC<Props> = ({}) => {
+    const navigation = useNavigation();
     const [coffeeData, setCoffeeData] = useState<Array<Coffee>>();
     const [coffeeCategoriesData, setCoffeeCategoriesData] = useState<Array<CoffeeCategory>>([]);
     const [selectedCategory, setSelectedCategory] = useState<CoffeeCategory>(coffeeCategoriesData[0]);
@@ -36,7 +37,23 @@ const Home: React.FC<Props> = ({}) => {
         }
     }
 
-    const renderCoffeeItem = ({item: coffee}: ListRenderItemInfo<Coffee>) => <ProductCard coffee={coffee}/>
+    const renderHeader = () => (
+        <View style={styles.header}>
+            <Image source={{
+                uri: 'https://coffee.alexflipnote.dev/random',
+                height: 40,
+                width: 40
+            }} style={{borderRadius: 100}}/>
+
+            <Ionicons name={'notifications-outline'} size={25}/>
+
+        </View>
+    )
+
+    const renderCoffeeItem = ({item: coffee}: ListRenderItemInfo<Coffee>) => <Pressable
+        onPress={() => navigation.navigate(navigations.DETAILS as never)}>
+        <ProductCard coffee={coffee}/>
+    </Pressable>
     const renderOfferItem = ({item: offer}: ListRenderItemInfo<Coffee>) => <OffersCard offer={offer}/>
 
     const renderCoffeeCategoryItem = ({
@@ -63,6 +80,7 @@ const Home: React.FC<Props> = ({}) => {
                 showsVerticalScrollIndicator={false}
                 ListHeaderComponent={
                     <>
+                        {renderHeader()}
                         <AppText style={styles.greeting}>Good morning, David</AppText>
                         <HomeSearch/>
                         <AppText style={styles.title}>Categories</AppText>
@@ -131,6 +149,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 20,
         marginTop: 15,
+    },
+    header: {
+        alignSelf: 'center',
+        width: '90%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 })
 

@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Pressable, StyleSheet, View, ViewStyle} from "react-native";
+import {Pressable, StyleSheet, ViewStyle} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import AppText from "./appText";
 import colors from "../../config/colors";
