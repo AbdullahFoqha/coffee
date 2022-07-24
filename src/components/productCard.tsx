@@ -1,16 +1,20 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, View, ViewStyle} from "react-native";
+import { Dimensions, Image, StyleSheet, View, ViewStyle } from "react-native";
 import Coffee from "../models/coffee";
 import AppView from "./common/appView";
 import colors from "../config/colors";
 import AppText from "./common/appText";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppIcon from "./common/appIcon";
+import { nodeFromRef, SharedElement } from "react-native-shared-element";
 
 interface Props {
     coffee: Coffee,
     style?: ViewStyle
 }
+
+let startAncestor;
+let startNode;
 
 const ProductCard: React.FC<Props> = ({
     coffee: {
@@ -23,13 +27,14 @@ const ProductCard: React.FC<Props> = ({
     style
 }) => {
     return (
-        <AppView style={[styles.container, style!]}>
+        <View style={[styles.container, style!]} ref={ref => startAncestor = nodeFromRef(ref)}>
             <View style={styles.ratingContainer}>
                 <MaterialCommunityIcons name={'star'} color={colors.white} size={15}/>
                 <AppText style={styles.rating}>{rating}</AppText>
             </View>
-            <Image source={{uri: imageURL}} style={styles.image}/>
-
+            <SharedElement onNode={node => startNode = node}>
+                <Image source={{uri: imageURL}} style={styles.imageContainer}/>
+            </SharedElement>
             <AppText textProps={{
                 numberOfLines: 1,
                 ellipsizeMode: 'tail'
@@ -40,7 +45,7 @@ const ProductCard: React.FC<Props> = ({
                 <AppText style={styles.price}>${price}</AppText>
                 <AppIcon Icon={<MaterialCommunityIcons name={'plus'} size={20} color={colors.white}/>}/>
             </AppView>
-        </AppView>
+        </View>
     );
 }
 
@@ -54,6 +59,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 10,
         width: Dimensions.get('screen').width * 0.4,
+        elevation: 5,
         shadowColor: colors.textPrimary,
         shadowRadius: 3,
         shadowOpacity: .2,
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
             height: 2
         }
     },
-    image: {
+    imageContainer: {
         width: '100%',
         height: 125,
         borderRadius: 20,

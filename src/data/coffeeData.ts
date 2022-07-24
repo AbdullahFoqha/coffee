@@ -1,60 +1,64 @@
 import CoffeeCategory from "../models/category";
 import Coffee from "../models/coffee";
 
-const categories: Array<CoffeeCategory> = new Array<CoffeeCategory>({
-        id: 1,
-        categoryName: 'Cappacino',
-        iconName: 'coffee'
-    }, {
-        id: 2,
-        categoryName: 'Coca cola',
-        iconName: 'food-fork-drink'
-    }, {
-        id: 3,
-        categoryName: 'Espresso',
-        iconName: 'coffee-maker'
-    }
-)
+const categories: Array<CoffeeCategory> = new Array<CoffeeCategory>(
+  {
+    id: 1,
+    categoryName: "Cappuccino",
+  },
+  {
+    id: 2,
+    categoryName: "Cold Brew",
+  },
+  {
+    id: 3,
+    categoryName: "Espresso",
+  }
+);
 
-const coffeeData: Array<Coffee> = new Array<Coffee>({
-    imageURL: 'https://coffee.alexflipnote.dev/random',
-    title: 'Cappacino asdf sdf asdf',
+const coffeeData: Array<Coffee> = new Array<Coffee>(
+  {
+    imageURL: "https://coffee.alexflipnote.dev/random",
+    title: "Cappuccino",
     favorite: true,
     price: 5.12,
-    subTitle: 'without sugar',
+    subTitle: "without sugar",
     rating: 4.5,
-    description: 'Get three ice flavoured cappuccinos for the'
-}, {
-    imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
-    title: 'Espresso',
+    description: "Get three ice flavoured cappuccinos for the",
+  },
+  {
+    imageURL: "https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg",
+    title: "Espresso",
     favorite: true,
     price: 5.12,
-    subTitle: 'with cream',
+    subTitle: "with cream",
     rating: 4.5,
-    description: 'Get three ice flavoured cappuccinos for the'
-}, {
-    imageURL: 'https://coffee.alexflipnote.dev/random',
-    title: 'Cappacino',
+    description: "Get three ice flavoured cappuccinos for the",
+  },
+  {
+    imageURL: "https://coffee.alexflipnote.dev/random",
+    title: "Cappuccino",
     favorite: true,
     price: 5.12,
-    subTitle: 'without sugar',
+    subTitle: "with low fat milk",
     rating: 4.5,
-    description: 'Get three ice flavoured cappuccinos for the'
-}, {
-    imageURL: 'https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg',
-    title: 'Cappacino',
+    description: "Get three ice flavoured cappuccinos for the",
+  },
+  {
+    imageURL: "https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg",
+    title: "Cappuccino",
     favorite: true,
     price: 5.12,
-    subTitle: 'without sugar',
+    subTitle: "without sugar",
     rating: 4.5,
-    description: 'Get three ice flavoured cappuccinos for the'
-})
+    description: "Get three ice flavoured cappuccinos for the",
+  }
+);
 
 export const getCategories = (): Array<CoffeeCategory> => {
-    return categories
-}
-
+  return categories;
+};
 
 export const getCoffeeList = (): Array<Coffee> => {
-    return coffeeData
-}
+  return coffeeData;
+};

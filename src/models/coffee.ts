@@ -1,5 +1,5 @@
 export default interface Coffee {
-    imageURL: string,
+    imageURL: string | undefined,
     title: string,
     subTitle: string,
     price: number,

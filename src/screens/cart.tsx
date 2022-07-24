@@ -1,20 +1,14 @@
-import React from 'react';
-import {StyleSheet, View} from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-interface Props {
-
-}
+interface Props {}
 
 const Cart: React.FC<Props> = ({}) => {
-    return (
-        <View style={styles.container}>
-
-        </View>
-    );
-}
+  return <View style={styles.container}></View>;
+};
 
 const styles = StyleSheet.create({
-    container: {}
-})
+  container: {},
+});
 
 export default Cart;

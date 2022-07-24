@@ -1,25 +1,21 @@
-import React from 'react';
-import {StyleSheet, View} from "react-native";
-import AppText from "../components/common/appText";
-import AppView from "../components/common/appView";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-interface Props {
-
-}
+interface Props {}
 
 const Profile: React.FC<Props> = ({}) => {
-    return (
-        <View style={styles.container}>
-
-        </View>
-    );
-}
+  return (
+    <View style={styles.container}>
+      <Text></Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default Profile;
