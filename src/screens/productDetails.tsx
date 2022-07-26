@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Coffee from "../models/coffee";
@@ -36,6 +43,9 @@ const ProductDetails: React.FC = () => {
     title: "",
   });
 
+  const [numberOfLines, setNumberOfLines] = useState(3);
+  const [selectedSize, setSelectedSize] = useState(0);
+
   useEffect(() => setCoffee(route.params.coffee), []);
 
   useEffect(() => {
@@ -51,6 +61,9 @@ const ProductDetails: React.FC = () => {
 
   let endAncestor;
   let endNode;
+
+  const handleSizeChange = (size: number) => setSelectedSize(size);
+
   return (
     <View style={styles.container}>
       <View
@@ -118,28 +131,14 @@ const ProductDetails: React.FC = () => {
               <Text style={{ marginLeft: 5, fontSize: 18 }}>Coffee</Text>
             </View>
 
-            <View
-              style={{
-                width: 1,
-                height: "100%",
-                backgroundColor: colors.textPrimary,
-                opacity: 0.5,
-              }}
-            />
+            <View style={styles.tagDivider} />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Drops height={15} width={15} fill={colors.accent} />
               <Text style={{ marginLeft: 5, fontSize: 18 }}>Chocolate</Text>
             </View>
 
-            <View
-              style={{
-                width: 1,
-                height: "100%",
-                backgroundColor: colors.textPrimary,
-                opacity: 0.5,
-              }}
-            />
+            <View style={styles.tagDivider} />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Flames height={20} width={20} fill={colors.accent} />
@@ -150,80 +149,157 @@ const ProductDetails: React.FC = () => {
           </View>
 
           <View style={{ marginVertical: 20 }}>
-            <Text
-              style={{
-                fontSize: 25,
-                fontWeight: "bold",
-                color: colors.textPrimary,
-                marginTop: 5,
-              }}
-            >
-              Coffee Size
-            </Text>
+            <Text style={styles.detailsHeaders}>Coffee Size</Text>
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
-                marginTop: 20,
               }}
             >
-              <View
-                style={{
-                  paddingHorizontal: 35,
-                  paddingVertical: 15,
-                  backgroundColor: colors.primary,
-                  borderRadius: 70,
-                }}
-              >
-                <Text style={{ fontSize: 20, color: colors.white }}>Small</Text>
-              </View>
-              <View
-                style={{
-                  paddingHorizontal: 35,
-                  paddingVertical: 15,
-                  backgroundColor: colors.white,
-                  borderRadius: 70,
-                }}
-              >
-                <Text style={{ fontSize: 20, color: colors.textPrimary }}>
-                  Medium
-                </Text>
-              </View>
-              <View
-                style={{
-                  paddingHorizontal: 35,
-                  paddingVertical: 15,
-                  backgroundColor: colors.white,
-                  borderRadius: 70,
-                }}
-              >
-                <Text style={{ fontSize: 20, color: colors.textPrimary }}>
-                  Large
-                </Text>
-              </View>
+              <Pressable onPress={() => handleSizeChange(0)}>
+                <View
+                  style={[
+                    styles.coffeeSize,
+                    selectedSize == 0
+                      ? {
+                          backgroundColor: colors.primary,
+                        }
+                      : {},
+                  ]}
+                >
+                  <Text
+                    style={[
+                      { fontSize: 20, color: colors.textPrimary },
+                      selectedSize == 0
+                        ? {
+                            color: colors.white,
+                          }
+                        : {},
+                    ]}
+                  >
+                    Small
+                  </Text>
+                </View>
+              </Pressable>
+
+              <Pressable onPress={() => handleSizeChange(1)}>
+                <View
+                  style={[
+                    styles.coffeeSize,
+                    selectedSize == 1
+                      ? {
+                          backgroundColor: colors.primary,
+                        }
+                      : {},
+                  ]}
+                >
+                  <Text
+                    style={[
+                      { fontSize: 20, color: colors.textPrimary },
+                      selectedSize == 1
+                        ? {
+                            color: colors.white,
+                          }
+                        : {},
+                    ]}
+                  >
+                    Medium
+                  </Text>
+                </View>
+              </Pressable>
+              <Pressable onPress={() => handleSizeChange(2)}>
+                <View
+                  style={[
+                    styles.coffeeSize,
+                    selectedSize == 2
+                      ? {
+                          backgroundColor: colors.primary,
+                        }
+                      : {},
+                  ]}
+                >
+                  <Text
+                    style={[
+                      { fontSize: 20, color: colors.textPrimary },
+                      selectedSize == 2
+                        ? {
+                            color: colors.white,
+                          }
+                        : {},
+                    ]}
+                  >
+                    Large
+                  </Text>
+                </View>
+              </Pressable>
             </View>
           </View>
 
           <View>
-            <Text
-              style={{
-                fontSize: 25,
-                fontWeight: "bold",
-                color: colors.textPrimary,
-                marginTop: 5,
-              }}
-            >
-              About
-            </Text>
+            <Text style={styles.detailsHeaders}>About</Text>
 
-            <Text numberOfLines={3} style={{ lineHeight: 25 }}>
+            <Text
+              numberOfLines={numberOfLines}
+              onPress={() => setNumberOfLines(numberOfLines === 30 ? 3 : 30)}
+            >
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
               adipisci aliquid aspernatur debitis delectus ducimus earum eius
-              error et exercitationem explicabo fugiat fugit incidunt iste
-              itaque iure, laboriosam laudantium maiores modi nisi numquam odit
-              quam qui quidem, quos recusandae reiciendis repellendus
-              reprehenderit sapiente soluta tempore vitae voluptas voluptatem.
-              Incidunt, voluptatum.
+              error et exercitationem explicabo fugiat fugit incidunt iste quam
+              qui quidem, quos recusandae reiciendis repellendus reprehenderit
+              sapiente soluta tempore vitae voluptas voluptatem. Incidunt,
+              voluptatum.
+            </Text>
+          </View>
+
+          <View
+            style={{
+              marginTop: 30,
+              backgroundColor: colors.primary,
+              paddingVertical: 20,
+              paddingHorizontal: 40,
+              borderRadius: 80,
+              height: 70,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              elevation: 5,
+              shadowOffset: {
+                width: 1,
+                height: 1,
+              },
+              shadowColor: colors.textPrimary,
+              shadowOpacity: 0.2,
+            }}
+          >
+            <Text
+              style={{
+                color: colors.white,
+                fontWeight: "500",
+                fontSize: 25,
+                flexGrow: 1,
+              }}
+            >
+              Add to cart
+            </Text>
+            <View
+              style={[
+                styles.tagDivider,
+                {
+                  backgroundColor: colors.white,
+                  height: "70%",
+                  marginRight: 20,
+                },
+              ]}
+            />
+            <Text
+              style={{
+                color: colors.white,
+                fontWeight: "bold",
+                fontSize: 25,
+                marginRight: 10,
+              }}
+            >
+              $5.12
             </Text>
           </View>
         </View>
@@ -306,8 +382,41 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     justifyContent: "space-around",
+    elevation: 5,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowColor: colors.textPrimary,
+    shadowOpacity: 0.2,
+  },
+  tagDivider: {
+    width: 1,
+    height: "100%",
+    backgroundColor: colors.textPrimary,
+    opacity: 0.5,
   },
   subTitle: { color: colors.white },
+  coffeeSize: {
+    paddingHorizontal: 35,
+    paddingVertical: 15,
+    backgroundColor: colors.white,
+    borderRadius: 70,
+    elevation: 5,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowColor: colors.textPrimary,
+    shadowOpacity: 0.2,
+    color: colors.white,
+  },
+  detailsHeaders: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: colors.textPrimary,
+    marginVertical: 15,
+  },
 });
 
 export default ProductDetails;

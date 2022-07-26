@@ -39,15 +39,15 @@ const AppIcon: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 5,
     padding: 10,
     flexDirection: "row",
     borderRadius: 25,
     backgroundColor: colors.primary,
     alignItems: "center",
+    elevation: 5,
     shadowOffset: {
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
     },
     shadowColor: colors.textPrimary,
     shadowOpacity: 0.2,

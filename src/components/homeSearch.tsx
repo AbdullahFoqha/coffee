@@ -39,6 +39,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bgSecondary,
     alignItems: "center",
     alignSelf: "center",
+    elevation: 5,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowColor: colors.textPrimary,
+    shadowOpacity: 0.2,
   },
 });
 
