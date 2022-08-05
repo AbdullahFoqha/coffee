@@ -25,6 +25,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Cappuccino from "../../assets/cappuccino.svg";
 import ColdBrew from "../../assets/cold-berw.svg";
 import Espresso from "../../assets/espresso.svg";
+import { SharedElement } from "react-navigation-shared-element";
 
 interface Props {}
 
@@ -66,7 +67,7 @@ const Home: React.FC<Props> = ({}) => {
   };
 
   const onCoffeePress = (coffee: Coffee) =>
-    navigation.navigate({ name: Screens.DETAILS, params: { coffee: coffee } });
+    navigation.push(Screens.DETAILS, { coffee });
 
   const renderHeader = () => (
     <View style={styles.header}>
@@ -150,9 +151,21 @@ const Home: React.FC<Props> = ({}) => {
         ListHeaderComponent={
           <>
             {renderHeader()}
-            <AppText style={styles.greeting}>Good morning, David</AppText>
+            <SharedElement id={"title"}>
+              <AppText
+                textProps={{ maxFontSizeMultiplier: 1.2 }}
+                style={styles.greeting}
+              >
+                Good morning, David
+              </AppText>
+            </SharedElement>
             <HomeSearch />
-            <AppText style={styles.title}>Categories</AppText>
+            <AppText
+              textProps={{ maxFontSizeMultiplier: 1.2 }}
+              style={styles.title}
+            >
+              Categories
+            </AppText>
             <FlatList
               contentContainerStyle={[
                 styles.listContainer,
@@ -172,7 +185,12 @@ const Home: React.FC<Props> = ({}) => {
               renderItem={renderCoffeeItem}
             />
 
-            <AppText style={styles.title}>Special Offers &#x1f525;</AppText>
+            <AppText
+              textProps={{ maxFontSizeMultiplier: 1.2 }}
+              style={styles.title}
+            >
+              Special Offers &#x1f525;
+            </AppText>
           </>
         }
         style={styles.productList}

@@ -2,24 +2,35 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/home";
 import colors from "../config/colors";
 import React, { Fragment } from "react";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import Favorite from "../screens/favorite";
 import Cart from "../screens/cart";
 import Profile from "../screens/profile";
 import ProductDetails from "../screens/productDetails";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Screens from "../config/navigations";
 import Coffee from "../models/coffee";
+import HomeIcon from "../../assets/home.svg";
+import Heart from "../../assets/heart.svg";
+import CartIcon from "../../assets/cart.svg";
+
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 
 export type RoutesParamList = {
   [Screens.DETAILS]: { coffee: Coffee };
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createSharedElementStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name={Screens.HOME} component={Home} />
-    <Stack.Screen name={Screens.DETAILS} component={ProductDetails} />
+    <Stack.Screen
+      name={Screens.DETAILS}
+      component={ProductDetails}
+      sharedElements={(route, otherRoute, showing) => {
+        const { title } = route.params.coffee;
+        return [title];
+      }}
+    />
   </Stack.Navigator>
 );
 
@@ -37,41 +48,83 @@ const getMainNavigator = () => {
         headerShown: false,
       }}
     >
-      {renderTab(Screens.HOME_STACK, "home-variant", StackNavigator)}
-      {renderTab(Screens.FAVORITE, "cards-heart-outline", Favorite)}
-      {renderTab(Screens.CART, "cart-outline", Cart)}
-      {renderTab(Screens.PROFILE, "account-outline", Profile)}
+      <Tab.Screen
+        name={Screens.HOME_STACK}
+        options={() => ({
+          tabBarLabel: ({ focused, color }) => {
+            return (
+              <Fragment>
+                {focused && (
+                  <Entypo name={"dot-single"} size={20} color={color} />
+                )}
+              </Fragment>
+            );
+          },
+          tabBarIcon: ({ color, size }) => {
+            return <HomeIcon fill={color} width={size} height={size} />;
+          },
+        })}
+        component={StackNavigator}
+      />
+
+      <Tab.Screen
+        name={Screens.FAVORITE}
+        options={() => ({
+          tabBarLabel: ({ focused, color }) => {
+            return (
+              <Fragment>
+                {focused && (
+                  <Entypo name={"dot-single"} size={20} color={color} />
+                )}
+              </Fragment>
+            );
+          },
+          tabBarIcon: ({ color, size }) => {
+            return <Heart fill={color} width={size} height={size} />;
+          },
+        })}
+        component={Favorite}
+      />
+
+      <Tab.Screen
+        name={Screens.CART}
+        options={() => ({
+          tabBarLabel: ({ focused, color }) => {
+            return (
+              <Fragment>
+                {focused && (
+                  <Entypo name={"dot-single"} size={20} color={color} />
+                )}
+              </Fragment>
+            );
+          },
+          tabBarIcon: ({ color, size }) => {
+            return <CartIcon fill={color} width={28} height={28} />;
+          },
+        })}
+        component={Cart}
+      />
+
+      <Tab.Screen
+        name={Screens.PROFILE}
+        options={() => ({
+          tabBarLabel: ({ focused, color }) => {
+            return (
+              <Fragment>
+                {focused && (
+                  <Entypo name={"dot-single"} size={20} color={color} />
+                )}
+              </Fragment>
+            );
+          },
+          tabBarIcon: ({ color, size }) => {
+            return <HomeIcon fill={color} width={size} height={size} />;
+          },
+        })}
+        component={Profile}
+      />
     </Tab.Navigator>
   );
 };
-
-const renderTab = (
-  tabName: Screens,
-  iconName:
-    | "home-variant"
-    | "account-outline"
-    | "cart-outline"
-    | "cards-heart-outline",
-  Component: React.FC
-) => (
-  <Tab.Screen
-    name={tabName}
-    options={() => ({
-      tabBarLabel: ({ focused, color }) => {
-        return (
-          <Fragment>
-            {focused && <Entypo name={"dot-single"} size={20} color={color} />}
-          </Fragment>
-        );
-      },
-      tabBarIcon: ({ color, size }) => {
-        return (
-          <MaterialCommunityIcons name={iconName} color={color} size={size} />
-        );
-      },
-    })}
-    component={Component}
-  />
-);
 
 export default getMainNavigator;

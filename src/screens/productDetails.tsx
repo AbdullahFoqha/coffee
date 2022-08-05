@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Pressable,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -16,16 +17,12 @@ import AppIcon from "../components/common/appIcon";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import AppText from "../components/common/appText";
-import { nodeFromRef, SharedElement } from "react-native-shared-element";
 import CoffeeBean from "../../assets/coffee-beans.svg";
 import Flames from "../../assets/flames.svg";
 import Drops from "../../assets/drops.svg";
 import BackArrow from "../../assets/back-arrow.svg";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  setStatusBarBackgroundColor,
-  setStatusBarStyle,
-} from "expo-status-bar";
+import { SharedElement } from "react-navigation-shared-element";
 
 type DetailsScreenRouteProp = RouteProp<RoutesParamList, Screens.DETAILS>;
 
@@ -59,29 +56,23 @@ const ProductDetails: React.FC = () => {
     navigation.goBack();
   };
 
-  let endAncestor;
-  let endNode;
-
   const handleSizeChange = (size: number) => setSelectedSize(size);
 
   return (
     <View style={styles.container}>
-      <View
-        style={styles.imageContainer}
-        ref={(ref) => (endAncestor = nodeFromRef(ref))}
-      >
-        <SharedElement onNode={(node) => (endNode = node)}>
-          <LinearGradient
-            colors={["transparent", "rgba(0,0,0,0.8)"]}
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: 200,
-            }}
-          />
+      <View style={styles.imageContainer}>
+        <LinearGradient
+          colors={["transparent", "rgba(0,0,0,0.8)"]}
+          style={{
+            zIndex: 2,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 200,
+          }}
+        />
+        <SharedElement id={coffee.title}>
           <Image
             source={{ uri: coffee?.imageURL }}
             resizeMode={"cover"}
@@ -106,8 +97,18 @@ const ProductDetails: React.FC = () => {
       <View style={styles.contentArea}>
         <View style={styles.imageContent}>
           <View>
-            <AppText style={styles.title}>{coffee.title}</AppText>
-            <AppText style={styles.subTitle}>{coffee.subTitle}</AppText>
+            <AppText
+              textProps={{ maxFontSizeMultiplier: 1.2 }}
+              style={styles.title}
+            >
+              {coffee.title}
+            </AppText>
+            <AppText
+              textProps={{ maxFontSizeMultiplier: 1.2 }}
+              style={styles.subTitle}
+            >
+              {coffee.subTitle}
+            </AppText>
           </View>
           <View style={styles.ratingContainer}>
             <MaterialCommunityIcons
@@ -115,11 +116,16 @@ const ProductDetails: React.FC = () => {
               color={colors.white}
               size={15}
             />
-            <AppText style={styles.rating}>{coffee.rating}</AppText>
+            <AppText
+              textProps={{ maxFontSizeMultiplier: 1.2 }}
+              style={styles.rating}
+            >
+              {coffee.rating}
+            </AppText>
           </View>
         </View>
 
-        <View style={styles.bottomArea}>
+        <ScrollView style={styles.bottomArea}>
           <View style={styles.tagContainer}>
             <View
               style={{
@@ -128,28 +134,43 @@ const ProductDetails: React.FC = () => {
               }}
             >
               <CoffeeBean height={20} width={20} fill={colors.accent} />
-              <Text style={{ marginLeft: 5, fontSize: 18 }}>Coffee</Text>
+              <Text
+                maxFontSizeMultiplier={1.2}
+                style={{ marginLeft: 5, fontSize: 15 }}
+              >
+                Coffee
+              </Text>
             </View>
 
             <View style={styles.tagDivider} />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Drops height={15} width={15} fill={colors.accent} />
-              <Text style={{ marginLeft: 5, fontSize: 18 }}>Chocolate</Text>
+              <Text
+                maxFontSizeMultiplier={1.2}
+                style={{ marginLeft: 5, fontSize: 15 }}
+              >
+                Chocolate
+              </Text>
             </View>
 
             <View style={styles.tagDivider} />
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Flames height={20} width={20} fill={colors.accent} />
-              <Text style={{ marginLeft: 5, fontSize: 18 }}>
+              <Text
+                maxFontSizeMultiplier={1.2}
+                style={{ marginLeft: 5, fontSize: 15 }}
+              >
                 Medium roasted
               </Text>
             </View>
           </View>
 
           <View style={{ marginVertical: 20 }}>
-            <Text style={styles.detailsHeaders}>Coffee Size</Text>
+            <Text style={styles.detailsHeaders} maxFontSizeMultiplier={1.2}>
+              Coffee Size
+            </Text>
             <View
               style={{
                 flexDirection: "row",
@@ -168,8 +189,9 @@ const ProductDetails: React.FC = () => {
                   ]}
                 >
                   <Text
+                    maxFontSizeMultiplier={1.2}
                     style={[
-                      { fontSize: 20, color: colors.textPrimary },
+                      { fontSize: 15, color: colors.textPrimary },
                       selectedSize == 0
                         ? {
                             color: colors.white,
@@ -194,8 +216,9 @@ const ProductDetails: React.FC = () => {
                   ]}
                 >
                   <Text
+                    maxFontSizeMultiplier={1.2}
                     style={[
-                      { fontSize: 20, color: colors.textPrimary },
+                      { fontSize: 15, color: colors.textPrimary },
                       selectedSize == 1
                         ? {
                             color: colors.white,
@@ -219,8 +242,9 @@ const ProductDetails: React.FC = () => {
                   ]}
                 >
                   <Text
+                    maxFontSizeMultiplier={1.2}
                     style={[
-                      { fontSize: 20, color: colors.textPrimary },
+                      { fontSize: 15, color: colors.textPrimary },
                       selectedSize == 2
                         ? {
                             color: colors.white,
@@ -236,9 +260,13 @@ const ProductDetails: React.FC = () => {
           </View>
 
           <View>
-            <Text style={styles.detailsHeaders}>About</Text>
+            <Text maxFontSizeMultiplier={1.2} style={styles.detailsHeaders}>
+              About
+            </Text>
 
             <Text
+              style={{ lineHeight: 25 }}
+              maxFontSizeMultiplier={1.2}
               numberOfLines={numberOfLines}
               onPress={() => setNumberOfLines(numberOfLines === 30 ? 3 : 30)}
             >
@@ -253,16 +281,16 @@ const ProductDetails: React.FC = () => {
 
           <View
             style={{
+              alignSelf: "flex-end",
               marginTop: 30,
               backgroundColor: colors.primary,
               paddingVertical: 20,
               paddingHorizontal: 40,
-              borderRadius: 80,
-              height: 70,
+              borderRadius: 180,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              elevation: 5,
+              elevation: 3,
               shadowOffset: {
                 width: 1,
                 height: 1,
@@ -272,10 +300,11 @@ const ProductDetails: React.FC = () => {
             }}
           >
             <Text
+              maxFontSizeMultiplier={1.2}
               style={{
                 color: colors.white,
-                fontWeight: "500",
-                fontSize: 25,
+                fontWeight: "bold",
+                fontSize: 18,
                 flexGrow: 1,
               }}
             >
@@ -292,17 +321,18 @@ const ProductDetails: React.FC = () => {
               ]}
             />
             <Text
+              maxFontSizeMultiplier={1.2}
               style={{
                 color: colors.white,
                 fontWeight: "bold",
-                fontSize: 25,
+                fontSize: 18,
                 marginRight: 10,
               }}
             >
               $5.12
             </Text>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -328,6 +358,7 @@ const styles = StyleSheet.create({
     height: "50%",
   },
   contentArea: {
+    flex: 1,
     position: "absolute",
     bottom: 0,
     borderTopRightRadius: 40,
@@ -347,7 +378,7 @@ const styles = StyleSheet.create({
     marginTop: -60,
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: colors.white,
   },
@@ -373,7 +404,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: colors.bg,
     borderRadius: 40,
-    marginTop: 15,
+    paddingTop: 5,
   },
   tagContainer: {
     flexDirection: "row",
@@ -382,7 +413,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     justifyContent: "space-around",
-    elevation: 5,
+    elevation: 3,
     shadowOffset: {
       width: 1,
       height: 1,
@@ -402,7 +433,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: colors.white,
     borderRadius: 70,
-    elevation: 5,
+    elevation: 3,
     shadowOffset: {
       width: 1,
       height: 1,
@@ -412,7 +443,7 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   detailsHeaders: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     color: colors.textPrimary,
     marginVertical: 15,

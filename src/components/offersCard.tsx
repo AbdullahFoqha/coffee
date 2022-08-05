@@ -17,6 +17,7 @@ const OffersCard: React.FC<Props> = ({ offer }) => {
         <AppView style={styles.tagContainer}>
           <AppText
             textProps={{
+              maxFontSizeMultiplier: 1.2,
               ellipsizeMode: "tail",
               numberOfLines: 1,
             }}
@@ -25,7 +26,12 @@ const OffersCard: React.FC<Props> = ({ offer }) => {
             Discount Sales
           </AppText>
         </AppView>
-        <AppText style={styles.description}>{offer.description}</AppText>
+        <AppText
+          textProps={{ maxFontSizeMultiplier: 1.2 }}
+          style={styles.description}
+        >
+          {offer.description}
+        </AppText>
       </AppView>
     </View>
   );
@@ -38,12 +44,12 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "90%",
     shadowColor: colors.textPrimary,
-    elevation: 5,
+    elevation: 3,
     shadowRadius: 3,
     shadowOpacity: 0.2,
     shadowOffset: {
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
     },
     marginVertical: 7,
     borderRadius: 20,

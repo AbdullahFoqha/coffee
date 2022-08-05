@@ -18,6 +18,7 @@ const HomeSearch: React.FC<Props> = ({}) => {
         style={{ marginLeft: 10 }}
       />
       <TextInput
+        maxFontSizeMultiplier={1.2}
         style={{ marginLeft: 15, flexGrow: 1, fontSize: 18 }}
         placeholder="Search Coffee..."
       />
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bgSecondary,
     alignItems: "center",
     alignSelf: "center",
-    elevation: 5,
+    elevation: 3,
     shadowOffset: {
       width: 1,
       height: 1,

@@ -30,7 +30,12 @@ const AppIcon: React.FC<Props> = ({
       <Fragment>
         {Icon}
         {title && (
-          <AppText style={[styles.title, titleStyle!!]}>{title}</AppText>
+          <AppText
+            textProps={{ maxFontSizeMultiplier: 1.2 }}
+            style={[styles.title, titleStyle!!]}
+          >
+            {title}
+          </AppText>
         )}
       </Fragment>
     </Pressable>
@@ -44,7 +49,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: colors.primary,
     alignItems: "center",
-    elevation: 5,
+    elevation: 3,
     shadowOffset: {
       width: 1,
       height: 1,
