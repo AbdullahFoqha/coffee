@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Animated,
+  Dimensions,
   Image,
   Pressable,
   ScrollView,
@@ -31,6 +33,7 @@ const ProductDetails: React.FC = () => {
   const navigation = useNavigation();
 
   const [coffee, setCoffee] = useState<Coffee>({
+    id: "",
     description: "",
     favorite: false,
     imageURL: undefined,
@@ -43,10 +46,13 @@ const ProductDetails: React.FC = () => {
   const [numberOfLines, setNumberOfLines] = useState(3);
   const [selectedSize, setSelectedSize] = useState(0);
 
-  useEffect(() => setCoffee(route.params.coffee), []);
+  useEffect(() => {
+    setCoffee(route.params.coffee);
+  }, []);
 
   useEffect(() => {
     StatusBar.setBarStyle("light-content");
+    getIn();
     return () => {
       StatusBar.setBarStyle("dark-content");
     };
@@ -57,6 +63,23 @@ const ProductDetails: React.FC = () => {
   };
 
   const handleSizeChange = (size: number) => setSelectedSize(size);
+
+  const translateYAnim = new Animated.ValueXY({
+    x: 0,
+    y: Dimensions.get("window").height,
+  });
+
+  const getIn = () => {
+    Animated.timing(translateYAnim, {
+      toValue: {
+        y: Dimensions.get("window").height * 0.4,
+        x: 0,
+      },
+      duration: 750,
+      isInteraction: false,
+      useNativeDriver: false,
+    }).start();
+  };
 
   return (
     <View style={styles.container}>
@@ -72,7 +95,7 @@ const ProductDetails: React.FC = () => {
             height: 200,
           }}
         />
-        <SharedElement id={coffee.title}>
+        <SharedElement id={coffee.id}>
           <Image
             source={{ uri: coffee?.imageURL }}
             resizeMode={"cover"}
@@ -93,8 +116,7 @@ const ProductDetails: React.FC = () => {
         }
         style={[styles.favoriteButton, styles.headerButton]}
       />
-
-      <View style={styles.contentArea}>
+      <Animated.View style={[translateYAnim.getLayout(), styles.contentArea]}>
         <View style={styles.imageContent}>
           <View>
             <AppText
@@ -333,7 +355,7 @@ const ProductDetails: React.FC = () => {
             </Text>
           </View>
         </ScrollView>
-      </View>
+      </Animated.View>
     </View>
   );
 };

@@ -18,6 +18,7 @@ const categories: Array<CoffeeCategory> = new Array<CoffeeCategory>(
 
 const coffeeData: Array<Coffee> = new Array<Coffee>(
   {
+    id: "1",
     imageURL: "https://coffee.alexflipnote.dev/random",
     title: "Cappuccino",
     favorite: true,
@@ -27,6 +28,7 @@ const coffeeData: Array<Coffee> = new Array<Coffee>(
     description: "Get three ice flavoured cappuccinos for the",
   },
   {
+    id: "2",
     imageURL: "https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg",
     title: "Espresso",
     favorite: true,
@@ -36,6 +38,7 @@ const coffeeData: Array<Coffee> = new Array<Coffee>(
     description: "Get three ice flavoured cappuccinos for the",
   },
   {
+    id: "3",
     imageURL: "https://coffee.alexflipnote.dev/random",
     title: "Cappuccino",
     favorite: true,
@@ -45,6 +48,7 @@ const coffeeData: Array<Coffee> = new Array<Coffee>(
     description: "Get three ice flavoured cappuccinos for the",
   },
   {
+    id: "4",
     imageURL: "https://coffee.alexflipnote.dev/vIoCt3wSspk_coffee.jpg",
     title: "Cappuccino",
     favorite: true,

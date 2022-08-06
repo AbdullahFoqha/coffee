@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ProductCard: React.FC<Props> = ({
-  coffee: { imageURL, price, rating, title, subTitle },
+  coffee: { imageURL, price, rating, title, subTitle, id },
   style,
 }) => {
   return (
@@ -28,7 +28,7 @@ const ProductCard: React.FC<Props> = ({
           {rating}
         </AppText>
       </View>
-      <SharedElement id={title}>
+      <SharedElement id={id}>
         <Image source={{ uri: imageURL }} style={styles.imageContainer} />
       </SharedElement>
       <AppText

@@ -27,8 +27,8 @@ const StackNavigator = () => (
       name={Screens.DETAILS}
       component={ProductDetails}
       sharedElements={(route, otherRoute, showing) => {
-        const { title } = route.params.coffee;
-        return [title];
+        const { id } = route.params.coffee;
+        return [id];
       }}
     />
   </Stack.Navigator>
